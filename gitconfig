@@ -1,0 +1,5 @@
+[user]
+	email = ercpereda@gmail.com
+	name = Ernesto R. C. Pereda
+[core]
+	excludesfile = /home/er/.gitignore_global
