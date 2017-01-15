@@ -9,12 +9,16 @@ call vundle#begin()
 " core plugins
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'flazz/vim-colorschemes'
 
 " All plugins must be added before the following line
 call vundle#end()
 
 " ctrlp setup
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" vim-colorschemes setup
+colorscheme molokai
 
 filetype plugin indent on
 syntax on
