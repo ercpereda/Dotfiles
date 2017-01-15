@@ -8,5 +8,8 @@
 # Start tmux on every shell login
 [[ -z "$TMUX" ]] && exec tmux
 
-alias ls='ls --color=auto'
+# Prompt setup
 PS1='[\u@\h \W]\$ '
+
+# Load aliases
+. ~/.bash_aliases
