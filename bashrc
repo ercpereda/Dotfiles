@@ -9,7 +9,7 @@
 [[ -z "$TMUX" ]] && exec tmux
 
 # Prompt setup
-PS1='[\u@\h \W]\$ '
+PS1='[\W]\$ '
 
 # Load aliases
 . ~/.bash_aliases
