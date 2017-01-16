@@ -25,8 +25,10 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 colorscheme molokai
 
 " vim-airline setup
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
+
 
 filetype plugin indent on
 syntax on
