@@ -11,6 +11,10 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
 
+" main plugins
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 " All plugins must be added before the following line
 call vundle#end()
 
@@ -19,6 +23,10 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " vim-colorschemes setup
 colorscheme molokai
+
+" vim-airline setup
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
 
 filetype plugin indent on
 syntax on
