@@ -11,8 +11,9 @@ PS1='[\W]\$ '
 # Load aliases
 . ~/.bash_aliases
 
-# Add RVM to PATH for scripting
+# Load RVM
 export PATH="$PATH:$HOME/.rvm/bin"
+[ -s "$HOME/.rvm/scripts/rvm" ] && \. "$HOME/.rvm/scripts/rvm"
 
 # Load NVM
 export NVM_DIR="/usr/local/nvm"
