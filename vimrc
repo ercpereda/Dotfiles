@@ -20,6 +20,9 @@ call vundle#end()
 
 " ctrlp setup
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_max_files = 0
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:50'
+let g:ctrlp_custom_ignore = 'node_modules/'
 
 " vim-colorschemes setup
 colorscheme molokai
