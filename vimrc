@@ -38,3 +38,14 @@ set tabstop=2
 set shiftwidth=2
 " on pressing tab, insert 2 spaces
 set expandtab
+
+" keybindings
+nmap ; :
+let mapleader = "\<Space>"
+vnoremap // y/<C-R>"<CR>"
+nnoremap <Leader>p :set invpaste<CR>
+
+" crosshairs
+hi CursorLine   cterm=NONE ctermbg=235
+hi CursorColumn cterm=NONE ctermbg=235
+nnoremap x :set cursorline! cursorcolumn!
