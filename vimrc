@@ -15,11 +15,18 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
+" Other plugins
+Plugin 'scrooloose/nerdtree'
+Plugin 'easymotion/vim-easymotion'
+
 " All plugins must be added before the following line
 call vundle#end()
 
 " ctrlp setup
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_max_files = 0
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:50'
+let g:ctrlp_custom_ignore = 'node_modules/'
 
 " vim-colorschemes setup
 colorscheme molokai
@@ -38,3 +45,39 @@ set tabstop=2
 set shiftwidth=2
 " on pressing tab, insert 2 spaces
 set expandtab
+
+" keybindings
+nmap ; :
+let mapleader = "\<Space>"
+vnoremap // y/<C-R>"<CR>"
+nnoremap <Leader>p :set invpaste<CR>
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" crosshairs
+hi CursorLine   cterm=NONE ctermbg=235
+hi CursorColumn cterm=NONE ctermbg=235
+nnoremap <Leader>x :set cursorline! cursorcolumn!
+
+" the silver searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+  " bind \ to grep shorcut
+  "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+  nnoremap \ :Ag<SPACE>
+endif
+
+" nerdtree
+map <Leader>n :NERDTreeToggle<CR>
+
+" easymotion
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_startofline = 0
