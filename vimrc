@@ -15,6 +15,10 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
+" Other plugins
+Plugin 'scrooloose/nerdtree'
+Plugin 'easymotion/vim-easymotion'
+
 " All plugins must be added before the following line
 call vundle#end()
 
@@ -49,9 +53,6 @@ vnoremap // y/<C-R>"<CR>"
 nnoremap <Leader>p :set invpaste<CR>
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-" bind \ to grep shorcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag<SPACE>
 
 " crosshairs
 hi CursorLine   cterm=NONE ctermbg=235
@@ -66,4 +67,17 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
+  " bind \ to grep shorcut
+  "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+  nnoremap \ :Ag<SPACE>
 endif
+
+" nerdtree
+map <Leader>n :NERDTreeToggle<CR>
+
+" easymotion
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_startofline = 0
