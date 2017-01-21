@@ -25,7 +25,8 @@ export PATH="$PATH:$HOME/bin"
 # git aware prompt
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source  "${GITAWAREPROMPT}/main.sh"
-export PS1="\[\033[01;34m\][\W]\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
+export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
 
 # git completion
-. /etc/bash_completion.d/git-completion.bash
+. /usr/share/git/completion/git-completion.bash
+#. /etc/bash_completion.d/git-completion.bash
