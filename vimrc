@@ -18,6 +18,7 @@ Plugin 'vim-airline/vim-airline-themes'
 " Other plugins
 Plugin 'scrooloose/nerdtree'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
 
 " All plugins must be added before the following line
 call vundle#end()
