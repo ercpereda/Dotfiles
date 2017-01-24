@@ -11,6 +11,9 @@ PS1='[\W]\$ '
 # Load aliases
 . ~/.bash_aliases
 
+# Create VISUAL eviroment variable
+export VISUAL='vim'
+
 # Load RVM
 export PATH="$PATH:$HOME/.rvm/bin"
 [ -s "$HOME/.rvm/scripts/rvm" ] && \. "$HOME/.rvm/scripts/rvm"
