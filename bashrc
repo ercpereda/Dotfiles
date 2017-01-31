@@ -33,3 +33,10 @@ export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$tx
 # git completion
 . /usr/share/git/completion/git-completion.bash
 #. /etc/bash_completion.d/git-completion.bash
+
+# yarn path
+export PATH="$PATH:`yarn global bin`"
+
+# go path
+export GOPATH=$HOME/Develop/go
+export PATH="$PATH:$HOME/Develop/go/bin"
