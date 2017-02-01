@@ -1,6 +1,7 @@
 ! Use a nice font and size by default
 xterm*faceName: Droid Sans Mono
 xterm*faceSize: 12
+xterm*utf8: 1
 ! special
 xterm*.foreground:   #f8f8f2
 xterm*.background:   #272822
