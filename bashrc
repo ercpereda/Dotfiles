@@ -32,7 +32,9 @@ export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$tx
 
 # git completion
 . /usr/share/git/completion/git-completion.bash
-#. /etc/bash_completion.d/git-completion.bash
+
+# gitignore
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 # yarn path
 export PATH="$PATH:`yarn global bin`"
