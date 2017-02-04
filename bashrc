@@ -42,3 +42,11 @@ export PATH="$PATH:`yarn global bin`"
 # go path
 export GOPATH=$HOME/Develop/go
 export PATH="$PATH:$HOME/Develop/go/bin"
+
+# start ssh-agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+  ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+  eval "$(<~/.ssh-agent-thing)" > /dev/null
+fi
