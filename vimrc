@@ -20,8 +20,14 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
 
+" Languages
+Plugin 'fatih/vim-go'
+
 " All plugins must be added before the following line
 call vundle#end()
+
+" general setup
+set autowrite
 
 " ctrlp setup
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -82,3 +88,14 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline = 0
+
+" vim-go setup
+let g:go_fmt_command = "goimports"
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+
+autocmd FileType go nmap <leader>b <Plug>(go-build)
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
