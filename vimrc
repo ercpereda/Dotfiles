@@ -21,7 +21,10 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
 
 " Languages
+Plugin 'sheerun/vim-polyglot'
 Plugin 'fatih/vim-go'
+Plugin 'slashmili/alchemist.vim' " elixir
+Plugin 'w0rp/ale'
 
 " All plugins must be added before the following line
 call vundle#end()
@@ -67,11 +70,7 @@ hi CursorColumn cterm=NONE ctermbg=235
 nnoremap <Leader>x :set cursorline! cursorcolumn!
 
 " the silver searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+if executable('ag') " Use ag over grep set grepprg=ag\ --nogroup\ --nocolor " Use ag in CtrlP for listing files let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
   " bind \ to grep shorcut
@@ -99,3 +98,12 @@ autocmd FileType go nmap <leader>b <Plug>(go-build)
 autocmd FileType go nmap <leader>r <Plug>(go-run)
 autocmd FileType go nmap <leader>t <Plug>(go-test)
 autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
+
+" ale 
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+let g:ale_javascript_prettier_options = '--no-bracket-spacing --single-quote --trailing-comma es5'
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-f> <Plug>(ale_fix)
