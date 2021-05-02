@@ -2,9 +2,6 @@
 	excludesfile = /Users/er/.gitignore_global
 	editor = vim
 	autocrlf = input
-[user]
-	name = Ernesto R. C. Pereda
-	email = ercp42@gmail.com
 [merge]
 	tool = vimdiff
 	conflicstyle = diff3
@@ -14,3 +11,7 @@
 	colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
 [alias]
 	lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
+[includeIf "gitdir:~/Development/"]
+  path = ~/.gitconfig-personal
+[includeIf "gitdir:~/work/"]
+  path = ~/.gitconfig-work
