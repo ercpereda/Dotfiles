@@ -110,16 +110,8 @@ export LANG=en_US.UTF-8
 # Set alias
 
 ## Load external alias file.
-[ -f $HOME/.alaya/.alaya_profile ] && source $HOME/scripts/alias.sh
-
-## Define alias
+[ -f $HOME/.aliases ] && source $HOME/.aliases
 # alias vim="/usr/local/Cellar/vim/8.1.2150/bin/vim"
-alias vi='vim'
-alias psu='ps -x'
-alias ll='ls -lart'
-alias grep='grep --color -E'
-alias magit='vim -c MagitOnly'
-alias dc='docker-compose'
 
 # Load utils functions
 [ -f $HOME/.alaya/.alaya_profile ] && source $HOME/scripts/functions.sh

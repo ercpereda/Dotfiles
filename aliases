@@ -1,5 +1,15 @@
-alias vi='vim'
-alias psu='ps -x'
-alias ls='ls --color=auto'
-alias ll='ls -lart'
-alias grep='grep --color -E'
+# Unix
+alias ls="ls -G"
+alias ll="ls -lart"
+alias ln="ln -v"
+alias grep="grep --color -E"
+alias mkdir="mkdir -p"
+alias e="$EDITOR"
+alias v="$VISUAL"
+alias path="echo $PATH | tr -s ":" "\n""
+
+# Vim
+alias vi="vim"
+
+# Docker
+alias dc="docker-compose"
