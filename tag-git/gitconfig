@@ -1,3 +1,6 @@
+[user]
+	name = Ernesto R. C. Pereda
+	email = ercp42@gmail.com
 [core]
 	excludesfile = /Users/er/.gitignore_global
 	editor = vim
