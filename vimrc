@@ -18,6 +18,7 @@ Plugin 'tmhedberg/SimpylFold'
 " main plugins
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'sonph/onehalf', { 'rtp': 'vim' }
 
 " Other plugins
 Plugin 'scrooloose/nerdtree'
@@ -72,9 +73,10 @@ let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|\.sass-cache|bower_compon
 let g:SimpylFold_docstring_preview=1
 
 " vim-colorschemes setup
-colorscheme molokai
+colorscheme onehalfdark
 
 " vim-airline setup
+let g:airline_theme='onehalflight'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
