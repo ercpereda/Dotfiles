@@ -1,24 +1,49 @@
-packadd minpac
-call minpac#init()
+" Vundle config
+set nocompatible
+filetype off
 
-command! PackUpdate call minpac#update()
-command! PackClean call minpac#clean()
+" runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-call minpac#add('k-takata/minpac', { 'type': 'opt' })
-call minpac#add('tpope/vim-unimpaired')
-call minpac#add('tpope/vim-scriptease', { 'type': 'opt' })
-call minpac#add('tpope/vim-dispatch')
-call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() } })
-call minpac#add('junegunn/fzf.vim')
-call minpac#add('w0rp/ale')
-call minpac#add('flazz/vim-colorschemes')
-call minpac#add('vim-airline/vim-airline')
-call minpac#add('vim-airline/vim-airline-themes')
-call minpac#add('scrooloose/nerdtree')
-call minpac#add('Xuyuanp/nerdtree-git-plugin')
-call minpac#add('tpope/vim-fugitive')
+set guifont=DejaVu\ Sans:s12
+
+" core plugins
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'wikitopian/hardmode'
+Plugin 'tmhedberg/SimpylFold'
+
+" main plugins
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" Other plugins
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'jreybert/vimagit'
+Plugin 'junegunn/vim-easy-align'
+" Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
+Plugin 'mileszs/ack.vim'
+
+" Languages
+Plugin 'sheerun/vim-polyglot'
+" Plugin 'fatih/vim-go'
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'slashmili/alchemist.vim' " elixir
+Plugin 'w0rp/ale'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'ycm-core/YouCompleteMe'
+
+" All plugins must be added before the following line
+call vundle#end()
 
 " general setup
+set encoding=utf-8
 set nobackup
 set nowritebackup
 set noswapfile
@@ -32,6 +57,9 @@ set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
+"" Flaggin unnecessary whitespace
+highlight BadWhitespace ctermbg=red guibg=darkred
+au BufRead,bufNewFile * match BadWhitespace /\s\+$/ 
 
 
 " ctrlp setup
@@ -39,6 +67,9 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_max_files = 0
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:50'
 let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|\.sass-cache|bower_components|build|_build|deps|dist|doc|Pods|unity|UnityExport)$'
+
+" simpyfold setup
+let g:SimpylFold_docstring_preview=1
 
 " vim-colorschemes setup
 colorscheme molokai
@@ -52,9 +83,9 @@ set laststatus=2
 filetype plugin indent on
 syntax on
 " show existing tab with 2 spaces width
-set tabstop=2
+set tabstop=4
 " when indent with '>', use 2 spaces width
-set shiftwidth=2
+set shiftwidth=4
 " on pressing tab, insert 2 spaces
 set expandtab
 
@@ -63,10 +94,22 @@ nmap ; :
 let mapleader = "\<Space>"
 vnoremap // y/<C-R>"<CR>"
 nnoremap <Leader>p :set invpaste<CR>
-" bind K to grep word under cursor
+"" bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-" bind µ to sort the comma separates words on selection
-" xnoremap z s<c-r>=join(sort(split(@", '\s*,\s*')), ', ')<cr><esc>
+"" bind µ to sort the comma separates words on selection
+""" xnoremap z s<c-r>=join(sort(split(@", '\s*,\s*')), ', ')<cr><esc>
+"" split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+"" Replace by base 64 selection
+vnoremap <leader>e64 y:let @"=system('base64', @")<cr>gvp
+vnoremap <leader>d64 y:let @"=system('base64 --decode', @")<cr>gvp
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
 
 " crosshairs
 hi CursorLine   cterm=NONE ctermbg=235
@@ -101,28 +144,31 @@ let NERDTreeAutoDeleteBuffer = 1
 
 
 " easymotion setup
-"map <Leader>l <Plug>(easymotion-lineforward)
+" map <Leader>l <Plug>(easymotion-lineforward)
 " map <Leader>j <Plug>(easymotion-j)
 " map <Leader>k <Plug>(easymotion-k)
 " map <Leader>h <Plug>(easymotion-linebackward)
 " let g:EasyMotion_startofline = 0
 
 " vim-go setup
-let g:go_fmt_command = "goimports"
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
-
-autocmd FileType go nmap <leader>b <Plug>(go-build)
-autocmd FileType go nmap <leader>r <Plug>(go-run)
-autocmd FileType go nmap <leader>t <Plug>(go-test)
-autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
+" let g:go_fmt_command = "goimports"
+" map <C-n> :cnext<CR>
+" map <C-m> :cprevious<CR>
+" nnoremap <leader>a :cclose<CR>
+" 
+" autocmd FileType go nmap <leader>b <Plug>(go-build)
+" autocmd FileType go nmap <leader>r <Plug>(go-run)
+" autocmd FileType go nmap <leader>t <Plug>(go-test)
+" autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
 
 " ale 
+"" ale global setup.
+let g:airline#extensions#ale#enabled = 1
+"" ale fixers
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier', 'eslint']
 let g:ale_javascript_prettier_options = '--no-bracket-spacing --single-quote --trailing-comma es5'
-let g:airline#extensions#ale#enabled = 1
+let g:ale_fixers['python'] = ['black', 'isort'] 
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
@@ -137,3 +183,15 @@ autocmd BufWritePost *.ex silent :!mix format %
 
 " hardmode setup
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
+
+" youcompleteme setup
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Ack setup
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" vim-easy-align setup
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
