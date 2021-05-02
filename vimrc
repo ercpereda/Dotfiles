@@ -1,50 +1,63 @@
-" Vundle config
-set nocompatible
-filetype off
+" Minpac config
+function! PackInit() abort
+    packadd minpac
+    call minpac#init()
 
-" runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+    " core plugins
+    call minpac#add('k-takata/minpac', {'type': 'opt'})
+    call minpac#add('ctrlpvim/ctrlp.vim')
+    " call minpac#add('flazz/vim-colorschemes')
+    call minpac#add('tmhedberg/SimpylFold') " Python code folding
 
-set guifont=DejaVu\ Sans:s12
+    " main plugins
+    call minpac#add('vim-airline/vim-airline')
+    call minpac#add('vim-airline/vim-airline-themes')
+    call minpac#add('sonph/onehalf', { 'subdir': 'vim' })
 
-" core plugins
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'wikitopian/hardmode'
-Plugin 'tmhedberg/SimpylFold'
+    " Other plugins
+    call minpac#add('scrooloose/nerdtree')
+    call minpac#add('Xuyuanp/nerdtree-git-plugin')
+    call minpac#add('jreybert/vimagit')
+    call minpac#add('junegunn/vim-easy-align')
 
-" main plugins
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'sonph/onehalf', { 'rtp': 'vim' }
+    " Plugin 'easymotion/vim-easymotion'
+    call minpac#add('tpope/vim-fugitive')
 
-" Other plugins
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'jreybert/vimagit'
-Plugin 'junegunn/vim-easy-align'
-" Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-fugitive'
-Plugin 'mileszs/ack.vim'
+    " Languages
+    call minpac#add('sheerun/vim-polyglot')
+    call minpac#add('elixir-editors/vim-elixir')
+    call minpac#add('slashmili/alchemist.vim') " Elixir plugin
+    call minpac#add('w0rp/ale')
+    call minpac#add('godlygeek/tabular')
+    call minpac#add('plasticboy/vim-markdown')
+    call minpac#add('vim-scripts/indentpython.vim')
+    call minpac#add('ycm-core/YouCompleteMe')
 
-" Languages
-Plugin 'sheerun/vim-polyglot'
-" Plugin 'fatih/vim-go'
-Plugin 'elixir-editors/vim-elixir'
-Plugin 'slashmili/alchemist.vim' " elixir
-Plugin 'w0rp/ale'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'ycm-core/YouCompleteMe'
+    " Open Browser
+    call minpac#add('tyru/open-browser.vim')
+    call minpac#add('tyru/open-browser-unicode.vim')
+    call minpac#add('tyru/open-browser-github.vim')
+endfunction
 
-" All plugins must be added before the following line
-call vundle#end()
+function! PackList(...)
+    call PackInit()
+    return join(sort(keys(minpac#getpluglist())), "\n")
+endfunction
+
+command! PackUpdate call PackInit() | call minpac#update()
+command! PackClean call PackInit() | call minpac#clean()
+command! PackStatus packadd minpac | call minpac#status()
+command! -nargs=1 -complete=custom,PackList
+    \ PackOpenDir call PackInit() | call term_start(&shell,
+    \   {'cwd': minpac#getpluginfo(<q-args>).dir,
+    \    'term_finish': 'close'})
+command! -nargs=1 -complete=custom,PackList
+    \ PackOpenUrl call PackInit() | call openbrowser#open(
+    \ minpac#getpluginfo(<q-args>).url)
 
 " general setup
 set encoding=utf-8
+set guifont=DejaVu\ Sans:s12
 set nobackup
 set nowritebackup
 set noswapfile
@@ -64,7 +77,7 @@ au BufRead,bufNewFile * match BadWhitespace /\s\+$/
 
 
 " ctrlp setup
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+"set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_max_files = 0
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:50'
 let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|\.sass-cache|bower_components|build|_build|deps|dist|doc|Pods|unity|UnityExport)$'
@@ -73,7 +86,7 @@ let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|\.sass-cache|bower_compon
 let g:SimpylFold_docstring_preview=1
 
 " vim-colorschemes setup
-colorscheme onehalfdark
+colorscheme onehalflight
 
 " vim-airline setup
 let g:airline_theme='onehalfdark'
