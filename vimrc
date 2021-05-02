@@ -1,40 +1,22 @@
-" Vundle config
-set nocompatible
-filetype off
+packadd minpac
+call minpac#init()
 
-" runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+command! PackUpdate call minpac#update()
+command! PackClean call minpac#clean()
 
-set guifont=DejaVu\ Sans:s12
-
-" core plugins
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'wikitopian/hardmode'
-
-" main plugins
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-" Other plugins
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-fugitive'
-
-" Languages
-Plugin 'sheerun/vim-polyglot'
-Plugin 'fatih/vim-go'
-Plugin 'elixir-editors/vim-elixir'
-Plugin 'slashmili/alchemist.vim' " elixir
-Plugin 'w0rp/ale'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-
-" All plugins must be added before the following line
-call vundle#end()
+call minpac#add('k-takata/minpac', { 'type': 'opt' })
+call minpac#add('tpope/vim-unimpaired')
+call minpac#add('tpope/vim-scriptease', { 'type': 'opt' })
+call minpac#add('tpope/vim-dispatch')
+call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() } })
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('w0rp/ale')
+call minpac#add('flazz/vim-colorschemes')
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
+call minpac#add('scrooloose/nerdtree')
+call minpac#add('Xuyuanp/nerdtree-git-plugin')
+call minpac#add('tpope/vim-fugitive')
 
 " general setup
 set nobackup
