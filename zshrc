@@ -5,31 +5,49 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export TERM="xterm-256color"
+# Fix issue with bash_autocomplete
+autoload -U +X bashcompinit && bashcompinit
+autoload -U +X compinit && compinit
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/er/.oh-my-zsh
+# Setup tmux color config
+export TERM="xterm-256color"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/ecruz/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -50,17 +68,25 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+  docker
+  virtualenv
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -69,109 +95,86 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
+# Set alias
 
-# Add variable for for android sdk folder.
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export ANDROID_NDK_HOME="$ANDROID_HOME/android-ndk-r13b"
+## Load external alias file.
+source $HOME/scripts/alias.sh
 
-# Add android emulator and tools to de path.
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_NDK_HOME
+## Define alias
+alias vim="/usr/local/Cellar/vim/8.1.2150/bin/vim"
+alias vi='vim'
+alias psu='ps -x'
+alias ll='ls -lart'
+alias grep='grep --color -E'
+alias magit='vim -c MagitOnly'
+alias dc='docker-compose'
+
+# Load utils functions
+source $HOME/scripts/functions.sh
+
+# Setup asdf-vm
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
+# Setup python
+export PATH=$HOME/Library/Python/3.7/bin:$PATH
+
+# Setup golang
+export PATH=/usr/local/go/bin:$PATH
 
 
-# Add flutter to the path.
-export PATH="$PATH:$HOME/bin/flutter/bin"
+# Setup alaya-dev-cli
+export PATH=$HOME/alaya-cli/bin:$PATH
 
-# Add docker-compose to the PATH
-export PATH="$PATH:/usr/local/bin/docker-compose"
+# Alaya profile
+if [ -f $HOME/.alaya/.alaya_profile ]; then source $HOME/.alaya/.alaya_profile; fi
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# Setup go
+export GOPATH=$(go env GOPATH)
+export PATH=$GOPATH/bin:$PATH
 
-# Add Anaconda to the PATH
-# export PATH="$PATH:/anaconda3/bin"
+# Load secret variables
+if [ -f $HOME/.secrets ]; then source $HOME/.secrets; fi
 
-# Load awesome terminal fonts
-source ~/.fonts/*.sh
+# Kubernetes
+if command -v kubectl &> /dev/null; then source <(kubectl completion zsh); fi
+if command -v minikube &> /dev/null; then source <(minikube completion zsh); fi
+if command -v helm &> /dev/null; then source <(helm completion zsh); fi
+if command -v flux &> /dev/null; then source <(flux completion zsh); fi
+if command -v kind &> /dev/null; then source <(kind completion zsh); fi
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+KUBE_PS1_PREFIX=''
+KUBE_PS1_SUFFIX=''
+KUBE_PS1_SEPARATOR=''
+KUBE_PS1_BG_COLOR=''
+KUBE_PS1_SYMBOL_COLOR='black'
+KUBE_PS1_CTX_COLOR='black'
+KUBE_PS1_NS_COLOR='black'
 
-# Load asdf-vm
-source $HOME/.asdf/asdf.sh
-source $HOME/.asdf/completions/asdf.bash
+# Fluxcd
+export FLUX_FORWARD_NAMESPACE='fluxcd'
 
-# Powerlevel9k config
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs virtualenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-POWERLEVEL9K_DIR_PATH_SEPARATOR="%F{black} $(print_icon 'LEFT_SUBSEGMENT_SEPARATOR') %F{black}"
-POWERLEVEL9K_DIR_SHOW_WRITABLE=true
+# GPG
+export GPG_TTY=$(tty)
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# GH
+if [ /usr/local/bin/gh ]; then source <(gh completion -s zsh); fi
+export PATH=$PATH:/Users/ecruz/devops-cli/bin
 
-alias zshconfig="vim ~/.zshrc"
-alias zshreload="source ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias vi="vim"
-alias list-emulators="emulator -list-avds"
-alias run-emulator="emulator @$(list-emulators | sed -n 1p)"
-
-## Server alias
-alias infigo-staging="ssh -l jenkins 172.20.50.136 -t tmux a"
-
-# zlib config
-export LDFLAGS="${LDFLAGS} -L/usr/local/opt/zlib/lib"
-export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/zlib/include"
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# Add paraview to the path.
-export PATH="$PATH:/Applications/ParaView-5.6.1.app/Contents/bin/"
-
-# Add cargo to the path 
-export PATH=$HOME/.cargo/bin:$PATH
-
-# Add julia to the path
-export PATH=/Applications/Julia-1.0.app/Contents/Resources/julia/bin/:$PATH
-
-# Add fzf to the path
-export PATH=$HOME/.vim/pack/minpac/start/fzf/bin:$PATH
-
-# FZF Config
-export fzf_default_command='rg --files'
+# Python Virtual Envs
+export PYTHON_VENVS_DIR=$HOME/venvs
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
