@@ -76,7 +76,7 @@ let g:SimpylFold_docstring_preview=1
 colorscheme onehalfdark
 
 " vim-airline setup
-let g:airline_theme='onehalflight'
+let g:airline_theme='onehalfdark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
