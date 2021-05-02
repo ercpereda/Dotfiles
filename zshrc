@@ -16,7 +16,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export TERM="xterm-256color"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/ecruz/.oh-my-zsh"
+export ZSH="/Users/$USER/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -110,10 +110,10 @@ export LANG=en_US.UTF-8
 # Set alias
 
 ## Load external alias file.
-source $HOME/scripts/alias.sh
+[ -f $HOME/.alaya/.alaya_profile ] && source $HOME/scripts/alias.sh
 
 ## Define alias
-alias vim="/usr/local/Cellar/vim/8.1.2150/bin/vim"
+# alias vim="/usr/local/Cellar/vim/8.1.2150/bin/vim"
 alias vi='vim'
 alias psu='ps -x'
 alias ll='ls -lart'
@@ -122,7 +122,7 @@ alias magit='vim -c MagitOnly'
 alias dc='docker-compose'
 
 # Load utils functions
-source $HOME/scripts/functions.sh
+[ -f $HOME/.alaya/.alaya_profile ] && source $HOME/scripts/functions.sh
 
 # Setup asdf-vm
 . $HOME/.asdf/asdf.sh
@@ -142,8 +142,10 @@ export PATH=$HOME/alaya-cli/bin:$PATH
 if [ -f $HOME/.alaya/.alaya_profile ]; then source $HOME/.alaya/.alaya_profile; fi
 
 # Setup go
-export GOPATH=$(go env GOPATH)
-export PATH=$GOPATH/bin:$PATH
+if command -v go; then
+    export GOPATH=$(go env GOPATH)
+    export PATH=$GOPATH/bin:$PATH
+fi
 
 # Load secret variables
 if [ -f $HOME/.secrets ]; then source $HOME/.secrets; fi
@@ -154,14 +156,18 @@ if command -v minikube &> /dev/null; then source <(minikube completion zsh); fi
 if command -v helm &> /dev/null; then source <(helm completion zsh); fi
 if command -v flux &> /dev/null; then source <(flux completion zsh); fi
 if command -v kind &> /dev/null; then source <(kind completion zsh); fi
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-KUBE_PS1_PREFIX=''
-KUBE_PS1_SUFFIX=''
-KUBE_PS1_SEPARATOR=''
-KUBE_PS1_BG_COLOR=''
-KUBE_PS1_SYMBOL_COLOR='black'
-KUBE_PS1_CTX_COLOR='black'
-KUBE_PS1_NS_COLOR='black'
+
+
+if [ -f "/usr/local/opt/kube-ps1/share/kube-ps1.sh" ]; then
+    source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+    KUBE_PS1_PREFIX=''
+    KUBE_PS1_SUFFIX=''
+    KUBE_PS1_SEPARATOR=''
+    KUBE_PS1_BG_COLOR=''
+    KUBE_PS1_SYMBOL_COLOR='black'
+    KUBE_PS1_CTX_COLOR='black'
+    KUBE_PS1_NS_COLOR='black'
+fi
 
 # Fluxcd
 export FLUX_FORWARD_NAMESPACE='fluxcd'
@@ -170,7 +176,7 @@ export FLUX_FORWARD_NAMESPACE='fluxcd'
 export GPG_TTY=$(tty)
 
 # GH
-if [ /usr/local/bin/gh ]; then source <(gh completion -s zsh); fi
+if [ -f /usr/local/bin/gh ]; then source <(gh completion -s zsh); fi
 export PATH=$PATH:/Users/ecruz/devops-cli/bin
 
 # Python Virtual Envs
