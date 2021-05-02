@@ -1,3 +1,7 @@
 [user]
 	name = Ernesto R. C. Pereda
 	email = ernesto.cruz@alayacare.com
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg
