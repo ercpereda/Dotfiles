@@ -1,5 +1,14 @@
-[user]
-	email = me@ercpereda.xyz
-	name = Ernesto R. C. Pereda
 [core]
-	excludesfile = /home/er/.gitignore_global
+	excludesfile = /Users/er/.gitignore_global
+	editor = vim
+	autocrlf = input
+[user]
+	name = Ernesto R. C. Pereda
+	email = ercp42@gmail.com
+[merge]
+	tool = vimdiff
+	conflicstyle = diff3
+[mergetool]
+	prompt = false
+[alias]
+	lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
