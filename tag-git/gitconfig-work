@@ -1,6 +1,7 @@
 [user]
 	name = Ernesto R. C. Pereda
 	email = ernesto.cruz@alayacare.com
+	signingkey = 59C1D9A23BCD6629
 [commit]
 	gpgsign = true
 [gpg]

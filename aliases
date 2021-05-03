@@ -1,15 +1,53 @@
-# Unix
+# Basics
 alias ls="ls -G"
 alias ll="ls -lart"
+alias la='ls -liha'
 alias ln="ln -v"
-alias grep="grep --color -E"
 alias mkdir="mkdir -p"
 alias e="$EDITOR"
 alias v="$VISUAL"
 alias path="echo $PATH | tr -s ":" "\n""
+alias diff='diff -W 200 -b -y --suppress-common-lines'
+alias grep='grep --color=always --exclude-dir .git --exclude-dir vendor --exclude-dir env'
+
+# Verbose
+alias cp='cp -v'
+alias mv='mv -v'
+alias rm='rm -v'
 
 # Vim
 alias vi="vim"
 
 # Docker
 alias dc="docker-compose"
+
+# git
+alias gd='git diff'
+alias gs='git status'
+alias gl="git log --color=always --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gb='git rev-parse --abbrev-ref HEAD'
+alias gap='git add -p'
+alias glh='gl | head'
+alias gds='git diff --staged'
+alias gdw='git diff -w -U0 --word-diff-regex=[^[:space:]]'
+alias gca='git commit --amend -C HEAD'
+
+# kubernetes
+alias k='kubectl'
+
+# tmux
+alias t="tmux"
+alias ta="t a -t"
+alias tls="t ls"
+alias tn="t new -t"
+
+# Get columns
+alias c1="awk '{print \$1}'"
+alias c2="awk '{print \$2}'"
+alias c3="awk '{print \$3}'"
+alias c4="awk '{print \$4}'"
+alias c5="awk '{print \$5}'"
+alias c6="awk '{print \$6}'"
+alias c7="awk '{print \$7}'"
+alias c8="awk '{print \$8}'"
+alias c9="awk '{print \$9}'"

@@ -30,7 +30,6 @@ function! PackInit() abort
     call minpac#add('godlygeek/tabular')
     call minpac#add('plasticboy/vim-markdown')
     call minpac#add('vim-scripts/indentpython.vim')
-    call minpac#add('ycm-core/YouCompleteMe')
 
     " Open Browser
     call minpac#add('tyru/open-browser.vim')
@@ -85,8 +84,8 @@ let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|\.sass-cache|bower_compon
 let g:SimpylFold_docstring_preview=1
 
 " vim-colorschemes setup
-"colorscheme solarized8_light
-colorscheme Tomorrow-Night-Eighties
+colorscheme solarized8_light
+"colorscheme Tomorrow-Night-Eighties
 
 " vim-airline setup
 let g:airline_powerline_fonts = 1
@@ -197,10 +196,6 @@ autocmd BufWritePost *.ex silent :!mix format %
 
 " hardmode setup
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-
-" youcompleteme setup
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Ack setup
 if executable('ag')
