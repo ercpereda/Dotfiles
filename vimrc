@@ -6,13 +6,12 @@ function! PackInit() abort
     " core plugins
     call minpac#add('k-takata/minpac', {'type': 'opt'})
     call minpac#add('ctrlpvim/ctrlp.vim')
-    " call minpac#add('flazz/vim-colorschemes')
     call minpac#add('tmhedberg/SimpylFold') " Python code folding
 
     " main plugins
+    call minpac#add('flazz/vim-colorschemes')
     call minpac#add('vim-airline/vim-airline')
     call minpac#add('vim-airline/vim-airline-themes')
-    call minpac#add('sonph/onehalf', { 'subdir': 'vim' })
 
     " Other plugins
     call minpac#add('scrooloose/nerdtree')
@@ -86,10 +85,10 @@ let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|\.sass-cache|bower_compon
 let g:SimpylFold_docstring_preview=1
 
 " vim-colorschemes setup
-colorscheme onehalflight
+"colorscheme solarized8_light
+colorscheme Tomorrow-Night-Eighties
 
 " vim-airline setup
-let g:airline_theme='onehalfdark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
