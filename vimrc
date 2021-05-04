@@ -84,8 +84,8 @@ let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|\.sass-cache|bower_compon
 let g:SimpylFold_docstring_preview=1
 
 " vim-colorschemes setup
-colorscheme solarized8_light
-"colorscheme Tomorrow-Night-Eighties
+"colorscheme solarized8_light
+colorscheme Tomorrow-Night-Eighties
 
 " vim-airline setup
 let g:airline_powerline_fonts = 1
