@@ -83,11 +83,6 @@ let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|\.sass-cache|bower_compon
 " simpyfold setup
 let g:SimpylFold_docstring_preview=1
 
-" vim-colorschemes setup
-colorscheme Tomorrow-Night-Eighties
-nnoremap <Leader>l :colorscheme solarized8_light<CR>
-nnoremap <Leader>d :colorscheme Tomorrow-Night-Eighties<CR>
-
 " vim-airline setup
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -120,6 +115,11 @@ nnoremap <C-H> <C-W><C-H>
 "" Replace by base 64 selection
 vnoremap <leader>e64 y:let @"=system('base64', @")<cr>gvp
 vnoremap <leader>d64 y:let @"=system('base64 --decode', @")<cr>gvp
+
+" vim-colorschemes setup
+colorscheme Tomorrow-Night-Eighties
+nnoremap <Leader>l :colorscheme solarized8_light<CR>
+nnoremap <Leader>d :colorscheme Tomorrow-Night-Eighties<CR>
 
 " Enable folding
 set foldmethod=indent
