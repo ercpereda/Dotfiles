@@ -26,6 +26,8 @@
 	protocol = https
 [branch]
 	sort = authordate
+[pull]
+	rebase = true
 [includeIf "gitdir:~/Development/"]
   path = ~/.gitconfig-personal
 [includeIf "gitdir:~/work/"]
