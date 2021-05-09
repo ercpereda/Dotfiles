@@ -1,0 +1,17 @@
+# Mange Python Virtual Environments
+
+function venv-create() {
+    python3 -m venv $PYTHON_VENVS_DIR/$1
+}
+
+function venv-delete() {
+    rm -rf $PYTHON_VENVS_DIR/$1
+}
+
+function venv-activate() {
+    source $PYTHON_VENVS_DIR/$1/bin/activate
+}
+
+function venv-ls() {
+    ls -1 $PYTHON_VENVS_DIR/$1
+}
