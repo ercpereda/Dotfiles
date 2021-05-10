@@ -1,0 +1,14 @@
+# Mange Kubernetes Environments
+
+function cluster {
+  if [[ $1 =~ [a-z]+-[a-z]+ ]]; then
+    role=($(echo $1 | tr '-' '\n'))
+    role=${role[2]}
+  else
+    role=$1
+  fi
+  saml2aws login --force --profile $1 --role "arn:aws:iam::593479765548:role/${role}eksrm"
+  sleep 2
+  kubectx $1
+  [ ! -z "$2" ] && kubens $2
+}
